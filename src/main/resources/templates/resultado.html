@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http:///www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}"></title>
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> -->
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+
+<body>
+    <div class="alert alert-success">
+        <span th:text="'Tiempo transcurrido: ' + ${processTime} + ' milisegundos'"></span>
+    </div>
+    <div class="container">
+        <a th:href="@{/form}" class="btn btn-success btn-lg my-3">Volver</a>
+        <ul class="list-group my-2">
+            <!-- El valor usuario.identity no se pierde si hacemos uso de la anotación @SessionAttributes("user") ya que
+                este se encarga de pasar todos los valores del objeto mientrás dure la sesión del usuario al las vistas, 
+                pero en el caso contrario que esta anotación no se utilizará, entonces, deberíamos de pasar el valor por medio
+                de un elemento oculto hidden del html -->
+            <li class="list-group-item active" th:text="${titulo}"></li>
+            <li class="list-group-item" th:text="'usuario.identity: ' + ${usuario.identity}"></li>
+            <li class="list-group-item" th:text="'usuario.nombre: ' + ${usuario.nombre}"></li>
+            <li class="list-group-item" th:text="'usuario.apellido: ' + ${usuario.apellido}"></li>
+            <li class="list-group-item" th:text="'usuario.username: ' + ${usuario.username}"></li>
+            <li class="list-group-item" th:text="'usuario.email: ' + ${usuario.email}"></li>
+            <li class="list-group-item" th:text="'usuario.password: ' + ${usuario.password}"></li>
+            <li class="list-group-item" th:text="'usuario.matricula: ' + ${usuario.matricula}"></li>
+            <li class="list-group-item" th:text="'usuario.cuenta: ' + ${usuario.cuenta}"></li>
+            <li class="list-group-item" th:text="'usuario.pais: ' + ${usuario.pais}"></li>
+            <!-- <li th:text="${#dates.format(usuario.fechaNacimiento, 'yyyy/MM/dd')}"></li> -->
+            <li class="list-group-item" th:text="${#calendars.format(usuario.fechaNacimiento, 'yyyy/MM/dd')}"></li>
+            <li class="list-group-item" th:text="'usuario.paisMap: ' + ${usuario.paisMap}"></li>
+            <li class="list-group-item" th:text="'usuario.paisObject.id: ' + ${usuario.paisObject.id}"></li>
+            <li class="list-group-item" th:text="'usuario.paisObject.codigo: ' + ${usuario.paisObject.codigo}"></li>
+            <li class="list-group-item" th:text="'usuario.paisObject.nombre: ' + ${usuario.paisObject.nombre}"></li>
+            <li class="list-group-item" th:text="'usuario.habilitar: ' + ${usuario.habilitar}"></li>
+            <li class="list-group-item" th:text="'usuario.genero: ' + ${usuario.genero}"></li>
+        </ul>
+
+        <ul class="list-group my-2">
+            <li class="list-group-item active" th:text="'Roles as String'"></li>
+            <li class="list-group-item" th:each="rol : ${usuario.rolesStr}" th:text="${rol}"></li>
+        </ul>
+    
+        <ul class="list-group my-2">
+            <li class="list-group-item active" th:text="'Roles as Object'"></li>
+            <li class="list-group-item" th:each="rolOb : ${usuario.rolesObj}" th:text="${rolOb.id} + ': ' + ${rolOb.nombre} + ' => ' + ${rolOb.role}"></li>
+        </ul>
+    </div>
+
+</body>
+
+</html>
